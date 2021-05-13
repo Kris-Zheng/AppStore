@@ -2,11 +2,13 @@ import { defineConfig } from 'umi';
 
 export default defineConfig({
   exportStatic: {},
-  ssr: {},
+  ssr: {
+    removeWindowInitialProps: true,
+    staticMarkup: true,
+  },
   nodeModulesTransform: {
     type: 'none',
   },
-  links: [{ rel: 'icon', href: 'favicon.png' }],
   routes: [
     { path: '/', component: '@/pages/index' },
     { path: '/game', component: '@/pages/Game' },
