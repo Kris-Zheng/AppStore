@@ -77,6 +77,7 @@ const game = () => {
           title="精选十佳"
           data={smallBanners}
           currentWidth={width - 100}
+          titleWidth={width - 30}
         />
         <VariableCarousel
           title="我们都在玩"

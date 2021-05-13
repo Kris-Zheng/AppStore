@@ -57,11 +57,6 @@ const DetailPage = () => {
       bot: 'Shanghai Zishunafaasfafsasfas',
     },
     {
-      top: '语言',
-      mid: 'ZH',
-      bot: '简体中文',
-    },
-    {
       top: '大小',
       mid: '3.5',
       bot: 'GB',
@@ -249,7 +244,7 @@ const DetailPage = () => {
         </Row>
         <Slider {...firstCarouselSettings} className={styles.intro}>
           {data.map((item, key) => (
-            <div key={key} style={{ width: `${clientWidth - 270}px` }}>
+            <div key={key} style={{ width: '5%' }}>
               <div
                 style={{
                   borderTop: '1px solid rgb(211, 211, 211)',

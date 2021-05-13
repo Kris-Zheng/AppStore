@@ -221,7 +221,7 @@ const DetailPage = () => {
           {data.map((item, key) => (
             <div
               key={key}
-              style={{ width: `${clientWidth - 270}px` }}
+              style={{ width: '5%' }}
               className={styles.firstCarousel}
             >
               <div

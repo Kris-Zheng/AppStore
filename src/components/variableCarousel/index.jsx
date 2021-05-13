@@ -27,7 +27,10 @@ const centerCarousel = (props) => {
 
   return (
     <div className={styles.variableCarousel}>
-      <div className={styles.title} >
+      <div
+        className={styles.title}
+        style={{ width: props.titleWidth ? props.titleWidth : `${props?.currentWidth - 40}px` }}
+      >
         <h2 style={{ margin: 0 }}>{props?.title}</h2>
         <Link
           to="./list"
