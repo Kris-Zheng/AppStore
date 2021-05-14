@@ -25,4 +25,11 @@ export default defineConfig({
     { path: '/topTen', component: '@/pages/TopTen' },
   ],
   fastRefresh: {},
+  proxy: {
+    '/api': {
+      target: 'http://jsonplaceholder.typicode.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+  },
 });

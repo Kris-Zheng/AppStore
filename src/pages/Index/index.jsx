@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRequest } from 'ahooks';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Title from '../../components/title';
@@ -7,6 +8,7 @@ import VideoPlayer from '../../components/videoPlayer';
 import Bullets from './component/bulletScreen';
 import Apps from '../../components/apps';
 import pic1 from '../../asserts/333.png';
+import { queryNb } from '@/utils/api';
 import 'antd/dist/antd.css';
 import styles from './index.less';
 
@@ -29,10 +31,12 @@ const videoContent = {
 };
 
 export default function IndexPage() {
+  const { data, error, loading } = useRequest(queryNb);
+
   return (
     <>
-      <Header title='Today' header={false} icon={false} />
-      <Title date="3月4日 星期四" title="Today"  />
+      <Header title="Today" header={false} icon={false} />
+      <Title date="3月4日 星期四" title="Today" />
       <main className={styles.main}>
         <Card data={cardContent} />
         <Apps />

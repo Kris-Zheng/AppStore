@@ -9,12 +9,12 @@ const IconFont = createFromIconfontCN({
 
 const menu = [
   {
-    text: '麻烦让人迷个',
+    text: '首页',
     to: '/',
     icon: 'icon-today',
   },
   {
-    text: '游戏你赶紧日',
+    text: '游戏',
     to: '/game',
     icon: 'icon-rocket',
   },
@@ -50,7 +50,7 @@ const sideBar = () => {
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column-reverse',
-        justifyContent:'center',
+        justifyContent: 'center',
       }}
     >
       <span>{item.text}</span>
