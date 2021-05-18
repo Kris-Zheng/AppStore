@@ -17,8 +17,8 @@ const centerCarousel = (props) => {
     speed: 300,
   };
 
-  const slide = props.data?.map((item, key) => (
-    <div style={{ width: `${props?.currentWidth - 30}px` }} key={key}>
+  const slide = props.data.content?.map((item, key) => (
+    <div style={{ width: `${props.data?.width - 30}px` }} key={key}>
       <div style={{ marginRight: 10 }} className={styles.slider}>
         {item}
       </div>
@@ -29,14 +29,18 @@ const centerCarousel = (props) => {
     <div className={styles.variableCarousel}>
       <div
         className={styles.title}
-        style={{ width: props.titleWidth ? props.titleWidth : `${props?.currentWidth - 40}px` }}
+        style={{
+          width: props.data.titleWidth
+            ? props.data.titleWidth
+            : `${props.data?.width - 40}px`,
+        }}
       >
-        <h2 style={{ margin: 0 }}>{props?.title}</h2>
+        <h2 style={{ margin: 0 }}>{props.data?.title}</h2>
         <Link
           to="./list"
           style={{
             fontSize: 16,
-            display: props.showAll ? 'block' : 'none',
+            display: props.data?.showAll ? 'block' : 'none',
           }}
         >
           查看全部

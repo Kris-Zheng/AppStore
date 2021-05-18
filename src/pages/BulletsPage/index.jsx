@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { history } from 'umi';
+import { useRequest } from 'ahooks';
+import { queryNb } from '@/utils/api';
 import Bullets from '../../components/bullets';
 import Row from '../../components/row';
+import icon from '../../asserts/2.png';
 import styles from './index.less';
 
 const svg = (
@@ -24,24 +27,139 @@ const svg = (
 );
 
 const BulletsPage = () => {
-  const [rows, setRows] = useState([]);
+  const { data, error, loading } = useRequest(queryNb);
 
-  useEffect(() => {
-    const data = [];
-    for (let i = 0; i < 9; ++i) {
-      data.push(<Row />);
-    }
-
-    setRows(data);
-  }, []);
+  const receiveData = {
+    name: 'bullets',
+    title: '限时特惠',
+    subTitle: '春日游戏限时特惠',
+    des:
+      '许多游戏不仅玩法出众，更能带给你视觉和听觉的双重享受，甚至称得上是艺术品。下面这些作品都有着精美的画面和令人印象深刻的原声音乐，每一款都值得一试。',
+    data: [
+      [
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+      ],
+      [
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+      ],
+      [
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+        {
+          icon,
+          title: '抖音',
+          subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+          downloadLink: 'www.baidu.com',
+        },
+      ],
+    ],
+  };
 
   return (
     <>
       <header className={styles.header}>
         <h4 style={{ color: '#888888', fontWeight: 'normal', margin: 0 }}>
-          游戏美学
+          {receiveData.title}
         </h4>
-        <h2>虚拟世界种的视听盛宴</h2>
+        <h2>{receiveData.subTitle}</h2>
         <span
           style={{ position: 'fixed', top: 10, right: 10, zIndex: 1 }}
           onClick={() => window.history.back(-1)}
@@ -51,19 +169,21 @@ const BulletsPage = () => {
       </header>
       <main>
         <div className={styles.bulletsPage}>
-          <Bullets />
-          <Bullets />
-          <Bullets />
-        </div>
-        <p className={styles.des}>
-          许多游戏不仅玩法出众，更能带给你视觉和听觉的双重享受，甚至称得上是艺术品。下面这些作品都有着精美的画面和令人印象深刻的原声音乐，每一款都值得一试。
-        </p>
-        <div className={styles.rows}>
-          {rows.map((item, key) => (
-            <div key={key} onClick={() => history.push('./details')}>
-              {item}
+          {receiveData.data.map((item, key) => (
+            <div key={key}>
+              <Bullets data={item} />
             </div>
           ))}
+        </div>
+        <p className={styles.des}>{receiveData.des}</p>
+        <div className={styles.rows}>
+          {receiveData.data.map((item, key) => {
+            return (
+              <div key={key}>
+                <Row data={item} />
+              </div>
+            );
+          })}
         </div>
       </main>
     </>

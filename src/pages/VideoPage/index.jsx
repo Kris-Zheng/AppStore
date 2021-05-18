@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useRequest } from 'ahooks';
 import { Button } from 'antd';
+import { queryNb } from '@/utils/api';
 import icon from '../../asserts/2.png';
 import styles from './index.less';
 
@@ -23,8 +25,27 @@ const svg = (
 );
 
 const VideoPlayer = () => {
+  const { data, error, loading } = useRequest(queryNb);
   const [isBottom, setIsBottom] = useState(true);
   const ref = useRef();
+
+  const receiveData = {
+    name: 'videoPlayer',
+    title: '今日 APP',
+    subTitle: 'ASMR到底是什么？',
+    des: '用《Glitche》玩转故障艺术',
+    content:
+      '豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你关机发外柔内刚爱疯妹妹佛啊没钱哦可让人绝望额前的，不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不',
+    play_url: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4',
+    data: [
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+    ],
+  };
 
   useEffect(() => {
     const height =
@@ -45,23 +66,14 @@ const VideoPlayer = () => {
         {svg}
       </span>
       <video style={{ width: '100%' }} controls="controls" loop={true}>
-        <source
-          src="https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4"
-          type="video/mp4"
-        />
+        <source src={receiveData.play_url} type="video/mp4" />
       </video>
       <div style={{ margin: '1rem' }}>
-        <h4 style={{ margin: 0, color: '#888888' }}>探索AR世界</h4>
-        <h2 style={{ margin: 0 }}>未来“时装”秀</h2>
+        <h4 style={{ margin: 0, color: '#888888' }}>{receiveData.title}</h4>
+        <h2 style={{ margin: 0 }}>{receiveData.subTitle}</h2>
       </div>
       <p style={{ margin: '2rem 1rem', fontSize: 16, color: '#888888' }}>
-        豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你关机发外柔内刚爱疯妹妹佛啊没钱哦可让人绝望额前的，不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不不
-        豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你。
-        豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你关机发外柔内刚爱疯妹妹佛啊没钱哦可让人绝望额前的,  豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你。
-        豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你关机发外柔内刚爱疯妹妹佛啊没钱哦可让人绝望额前的,  豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你。
-        豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你关机发外柔内刚爱疯妹妹佛啊没钱哦可让人绝望额前的,  豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你。
-        豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你关机发外柔内刚爱疯妹妹佛啊没钱哦可让人绝望额前的,  豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你。
-        豆腐脑是难上加难国家能够见到你就给你打几个男的就能感觉到你关机发外柔内刚爱疯妹妹佛啊没钱哦可让人绝望额前的
+        {receiveData.content}
       </p>
       <div
         ref={ref}
@@ -73,9 +85,12 @@ const VideoPlayer = () => {
         }
         onClick={() => history.push('./details')}
       >
-        <img src={icon} style={{ width: 100, borderRadius: 15 }} />
-        <h2>哔哩哔哩-弹幕番剧直播高清视频</h2>
-        <h4>你感兴趣的视屏都在B站</h4>
+        <img
+          src={receiveData.data[0].icon}
+          style={{ width: 100, borderRadius: 15 }}
+        />
+        <h2>{receiveData.data[0].title}</h2>
+        <h4>{receiveData.data[0].subTitle}</h4>
         <Button type="primary" shape="round">
           获取
         </Button>

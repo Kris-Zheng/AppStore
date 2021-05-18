@@ -8,7 +8,7 @@ const IconFont = createFromIconfontCN({
 });
 
 const hotCategory = (props) => {
-  const content = props.data.map((item, key) => (
+  const content = props.data.content.map((item, key) => (
     <div
       key={key}
       className={styles.content}
@@ -22,7 +22,7 @@ const hotCategory = (props) => {
   return (
     <div className={styles.hotCategory}>
       <div className={styles.title}>
-        <h2 style={{ margin: 0 }}>{props.title}</h2>
+        <h2 style={{ margin: 0 }}>{props.data.title}</h2>
         <Link to="./category" style={{ fontSize: 16 }}>
           查看全部
         </Link>

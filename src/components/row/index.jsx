@@ -1,10 +1,9 @@
 import React from 'react';
 import { history } from 'umi';
 import { Row, Col, Button } from 'antd';
-import icon from '../../asserts/2.png';
 import styles from './index.less';
 
-const RowFomat = () => {
+const row = (props) => {
   const style = {
     display: 'flex',
     alignItems: 'center',
@@ -12,21 +11,18 @@ const RowFomat = () => {
     borderBottom: '1px solid rgb(211,211,211)',
   };
 
-  const toHref = () => {
-    history.push('./details');
-  };
-
-  return (
-    <Row align="stretch" onClick={() => toHref()}>
-      <Col span={5} style={{padding: '5px 0'}}>
-        <img src={icon} style={{ width: '100%', borderRadius: 15 }} />
+  const list = props.data.map((item, key) => (
+    <Row align="stretch" onClick={() => history.push('./details')} key={key}>
+      <Col span={5} style={{ padding: '5px 0' }}>
+        <img src={item.icon} style={{ width: '100%', borderRadius: 15 }} />
       </Col>
       <Col span={18} offset={1} style={style}>
         <div className={styles.titles}>
-          <h3>抖音能放啥感觉呢</h3>
-          <h4>记录美好生活无纺布生机勃发建设步伐加快</h4>
+          <h3>{item.title}</h3>
+          <h4>{item.subTitle}</h4>
         </div>
         <Button
+          onClick={() => window.open('https://www.baidu.com/')}
           shape="round"
           style={{
             color: 'rgb(24, 144, 255)',
@@ -37,7 +33,9 @@ const RowFomat = () => {
         </Button>
       </Col>
     </Row>
-  );
+  ));
+
+  return list;
 };
 
-export default RowFomat;
+export default row;

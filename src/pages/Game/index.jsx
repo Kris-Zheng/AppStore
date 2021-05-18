@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useRequest } from 'ahooks';
+import { queryNb } from '@/utils/api';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Title from '../../components/title';
@@ -8,49 +10,302 @@ import Row from '../../components/row';
 import BigRow from '../../components/bigRow';
 import BigBanner from '../../components/bigBanner';
 import SmallBanner from '../../components/smallBanner';
+import Card from '../../components/card';
+import VideoPlayer from '../../components/videoPlayer';
+import Apps from '../../components/apps';
+import icon from '../../asserts/2.png';
+import pic1 from '../../asserts/333.png';
+import banner from '../../asserts/15.png';
+import img from '../../asserts/111.png';
 import styles from './index.less';
 
 const game = () => {
+  const { data, error, loading } = useRequest(queryNb);
   const [isShown, setIsShown] = useState(false);
   const [width, setWidth] = useState();
-  const [rows, setRows] = useState([]);
-  const [bigRows, setBigRows] = useState([]);
-  const [bigBanners, setBigBanners] = useState([]);
-  const [smallBanners, setSmallBanners] = useState([]);
+
+  const receiveData = {
+    name: 'AAA',
+    data: [
+      {
+        name: 'card',
+        title: '主打推荐',
+        subTitle: '带宠闯地牢',
+        des: '体验Roguelike 游戏《提灯与地下城》',
+        img: pic1,
+      },
+      {
+        name: 'apps',
+        title: '专题',
+        subTitle: '时下畅销游戏',
+        data: [
+          {
+            icon,
+            title: '抖音',
+            subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+            downloadLink: 'www.baidu.com',
+          },
+          {
+            icon,
+            title: '抖音',
+            subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+            downloadLink: 'www.baidu.com',
+          },
+          {
+            icon,
+            title: '抖音',
+            subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+            downloadLink: 'www.baidu.com',
+          },
+          {
+            icon,
+            title: '抖音',
+            subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+            downloadLink: 'www.baidu.com',
+          },
+        ],
+      },
+      {
+        name: 'videoPlayer',
+        title: '今日 APP',
+        subTitle: 'ASMR到底是什么？',
+        des: '用《Glitche》玩转故障艺术',
+        play_url: 'https://zhstatic.zhihu.com/cfe/griffith/zhihu2018_hd.mp4',
+      },
+      {
+        name: 'bullets',
+        title: '限时特惠',
+        subTitle: '春日游戏限时特惠',
+        des: 'zcvzvdv',
+        data: [
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+        ],
+      },
+    ],
+  };
+  const findData = (name) => {
+    for (let i = 0; i < receiveData.data.length; ++i) {
+      if (receiveData?.data[i].name === name) {
+        return receiveData.data[i];
+      }
+    }
+  };
+
+  const map = (index) => {
+    const page = [];
+    const row = findData(index);
+
+    row?.data.map((item, key) => {
+      const content = [];
+
+      switch (index) {
+        case 'row': {
+          content.push(
+            <div key={key}>
+              <Row data={item} />
+            </div>,
+          );
+          break;
+        }
+        case 'bigRow': {
+          content.push(
+            <div key={key}>
+              <BigRow data={item} />
+            </div>,
+          );
+          break;
+        }
+        case 'bigBanner': {
+          content.push(
+            <div key={key}>
+              <BigBanner data={item} />
+            </div>,
+          );
+          break;
+        }
+        case 'smallBanner': {
+          content.push(
+            <div key={key}>
+              <SmallBanner data={item} />
+            </div>,
+          );
+          break;
+        }
+      }
+      page.push(content);
+    });
+    return page;
+  };
+
+  const views = {
+    card: <Card data={findData('card')} />,
+    apps: <Apps data={findData('apps')} />,
+    videoPlayer: <VideoPlayer data={findData('videoPlayer')} />,
+    row: (
+      <VariableCarousel
+        data={{
+          content: map('row'),
+          width,
+          showAll: true,
+          title: findData('row')?.title,
+        }}
+      />
+    ),
+    bigRow: (
+      <VariableCarousel
+        data={{
+          content: map('bigRow'),
+          showAll: true,
+          width,
+          title: findData('bigRow')?.title,
+        }}
+      />
+    ),
+    bigBanner: (
+      <VariableCarousel
+        data={{
+          content: map('bigBanner'),
+          showAll: false,
+          width,
+        }}
+      />
+    ),
+    smallBanner: (
+      <VariableCarousel
+        data={{
+          content: map('smallBanner'),
+          width: width - 100,
+          titleWidth: width - 40,
+          showAll: true,
+          title: findData('smallBanner')?.title,
+        }}
+      />
+    ),
+    hotCategory: (
+      <HotCategory
+        data={{
+          content: findData('hotCategory')?.data,
+          title: findData('hotCategory')?.title,
+        }}
+      />
+    ),
+  };
 
   useEffect(() => {
     setWidth(document.documentElement.clientWidth);
-    const page = [];
-    for (let i = 0; i < 3; ++i) {
-      const content = [];
-      for (let i = 0; i < 3; ++i) {
-        content.push(<Row key={i} />);
-      }
-      page.push(content);
-    }
-    setRows(page);
-
-    const bigRow = [];
-    for (let i = 0; i < 3; ++i) {
-      const content = [];
-      for (let i = 0; i < 2; ++i) {
-        content.push(<BigRow key={i} />);
-      }
-      bigRow.push(content);
-    }
-    setBigRows(bigRow);
-
-    const bigBanner = [];
-    for (let i = 0; i < 5; ++i) {
-      bigBanner.push(<BigBanner />);
-    }
-    setBigBanners(bigBanner);
-
-    const smallBanner = [];
-    for (let i = 0; i < 10; ++i) {
-      smallBanner.push(<SmallBanner />);
-    }
-    setSmallBanners(smallBanner);
   }, []);
 
   const isHeaderShown = (value) => {
@@ -59,55 +314,12 @@ const game = () => {
 
   return (
     <>
-      <Header title="游戏" header={isShown} icon={false} />
-      <Title title="游戏" callBack={isHeaderShown} />
+      <Header title={receiveData.name} header={isShown} icon={false} />
+      <Title title={receiveData.name} callBack={isHeaderShown} />
       <main className={styles.main}>
-        <VariableCarousel
-          data={bigBanners}
-          showAll={false}
-          currentWidth={width}
-        />
-        <VariableCarousel
-          title="限时活动特别开启"
-          data={rows}
-          showAll={true}
-          currentWidth={width}
-        />
-        <VariableCarousel
-          title="精选十佳"
-          data={smallBanners}
-          currentWidth={width - 100}
-          titleWidth={width - 30}
-        />
-        <VariableCarousel
-          title="我们都在玩"
-          data={rows}
-          showAll={true}
-          currentWidth={width}
-        />
-        <HotCategory
-          title="热门类别"
-          data={[
-            { name: '益智解密区区饿饿饿饿版本', icon: 'icon-popcorn-icon' },
-            { name: '动作', icon: 'icon-popcorn-icon' },
-            { name: '角色扮演', icon: 'icon-popcorn-icon' },
-            { name: '策略', icon: 'icon-popcorn-icon' },
-            { name: '休闲', icon: 'icon-popcorn-icon' },
-            { name: '体育', icon: 'icon-popcorn-icon' },
-          ]}
-        />
-        <VariableCarousel
-          title="现可预定"
-          data={bigRows}
-          showAll={true}
-          currentWidth={width}
-        />
-        <VariableCarousel
-          title="今天玩什么"
-          data={rows}
-          showAll={true}
-          currentWidth={width}
-        />
+        {receiveData.data.map((item, key) => {
+          return <div key={key}>{views[item.name]}</div>;
+        })}
       </main>
       <Footer />
     </>

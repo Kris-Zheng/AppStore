@@ -1,7 +1,4 @@
 import React from 'react';
-import img1 from '../../asserts/7.png';
-import img2 from '../../asserts/8.png';
-import img3 from '../../asserts/9.png';
 import styles from './index.less';
 
 class Bullets extends React.Component {
@@ -9,20 +6,13 @@ class Bullets extends React.Component {
     super(props);
     this.state = {
       //存放弹幕
-      bulletChatList: [
-        { text: img1 },
-        { text: img2 },
-        { text: img3 },
-        { text: img1 },
-        { text: img2 },
-        { text: img3 },
-      ],
+      bulletChatList: [],
     };
   }
 
   componentDidMount() {
     //给弹幕初始位置
-    let data = this.state.bulletChatList;
+    let data = this.props.data;
     for (let i = 0; i < data.length; i++) {
       data[i].left = i * 100;
     }
@@ -56,7 +46,7 @@ class Bullets extends React.Component {
               style={{
                 left: `${item.left}px`,
               }}
-              src={item.text}
+              src={item.icon}
             ></img>
           );
         })}

@@ -1,16 +1,13 @@
 import React from 'react';
-import img from '../../asserts/111.png';
 import { history } from 'umi';
 
-const smallBanner = () => {
-  return (
-    <div onClick={() => history.push('./topTen')}>
-      <img src={img} style={{ width: '100%', borderRadius: 10 }} />
-      <p style={{ marginTop: '0.3125rem' }}>
-        精选十佳卡牌对战游戏
-      </p>
+const smallBanner = (props) => {
+  return props.data.map((item, key) => (
+    <div key={key} onClick={() => history.push('./topTen')}>
+      <img src={item.img} style={{ width: '100%', borderRadius: 10 }} />
+      <p style={{ marginTop: '0.3125rem' }}>{item.subTitle}</p>
     </div>
-  );
+  ));
 };
 
 export default smallBanner;

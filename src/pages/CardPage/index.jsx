@@ -1,6 +1,8 @@
 import React from 'react';
 import { history } from 'umi';
 import { Button } from 'antd';
+import { queryNb } from '@/utils/api';
+import { useRequest } from 'ahooks';
 import Card from '../../components/card';
 import Row from '../../components/row';
 import pic1 from '../../asserts/333.png';
@@ -27,11 +29,23 @@ const svg = (
 );
 
 const CardPage = () => {
-  const cardContent = {
-    title: '主打推荐',
-    des: '带宠闯地牢',
+  const { data, error, loading } = useRequest(queryNb);
+
+  const receiveData = {
+    title: '今日推荐',
+    subTitle: '带宠闯地牢',
     text: '体验Roguelike 游戏《提灯与地下城》',
     img: pic1,
+    content:
+      '双方难舍难分简介史蒂夫你放假森房间内释放技能升级妇女节苏丹诺夫几十年福建省带你飞上岛咖啡明年肯定是你分开时你打开菲尼克斯你疯狂的少年疯狂纳斯达克烦恼时看到你分开苏丹诺夫可是当你放开苏丹诺夫可是当你放开苏丹诺夫可是你开罚单的翻滚的发给你的难过的那个护卫很入味图文如图惹用途热议图恶意如图二一图二用途俄华人公会恶补你但是法家拂士积分榜上绝大部分就是不到附近上班的附近上班地方就是不简单方便的时间分别是',
+    data: [
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+    ],
   };
 
   return (
@@ -43,21 +57,21 @@ const CardPage = () => {
         {svg}
       </span>
       <div className={styles.card} onClick={() => history.push('./details')}>
-        <Card data={cardContent} />
+        <Card data={receiveData} />
       </div>
       <div className={styles.row}>
-        <Row />
+        <Row data={receiveData.data} />
       </div>
       <div className={styles.content}>
-        <p>
-          双方难舍难分简介史蒂夫你放假森房间内释放技能升级妇女节苏丹诺夫几十年福建省带你飞上岛咖啡明年肯定是你分开时你打开菲尼克斯你疯狂的少年疯狂纳斯达克烦恼时看到你分开苏丹诺夫可是当你放开苏丹诺夫可是当你放开苏丹诺夫可是你开罚单的翻滚的发给你的难过的那个
-          护卫很入味图文如图惹用途热议图恶意如图二一图二用途俄华人公会恶补你但是法家拂士积分榜上绝大部分就是不到附近上班的附近上班地方就是不简单方便的时间分别是
-        </p>
+        <p>{receiveData.content}</p>
       </div>
       <div className={styles.app} onClick={() => history.push('./details')}>
-        <img src={icon} style={{ width: 100, borderRadius: 15 }} />
-        <h2>哔哩哔哩-弹幕番剧直播高清视频</h2>
-        <h4>你感兴趣的视屏都在B站</h4>
+        <img
+          src={receiveData.data[0].icon}
+          style={{ width: 100, borderRadius: 15 }}
+        />
+        <h2>{receiveData.data[0].title}</h2>
+        <h4>{receiveData.data[0].subTitle}</h4>
         <Button type="primary" shape="round">
           获取
         </Button>
