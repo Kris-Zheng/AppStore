@@ -1,5 +1,5 @@
 import React from 'react';
-import Bullets from '../../../../components/bullets';
+import Bullets from './bulletsPosition';
 import { history } from 'umi';
 import styles from './index.less';
 

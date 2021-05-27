@@ -3,7 +3,6 @@ import { Button, Row, Col, Modal, Rate, Input } from 'antd';
 import { Link } from 'umi';
 import Slider from 'react-slick';
 import Header from './components/header';
-import Footer from '../../components/footer';
 import CenterCarousel from '../../components/variableCarousel';
 import Rows from '../../components/row';
 import Stars from './components/stars';
@@ -266,9 +265,9 @@ const DetailPage = () => {
             }}
           >
             <h2 style={{ margin: 0 }}>评分及评论</h2>
-            <Link to="./comments" style={{ fontSize: 16 }}>
+            {/* <Link to="./comments" style={{ fontSize: 16 }}>
               查看全部
-            </Link>
+            </Link> */}
           </div>
           <Stars />
         </div>
@@ -379,7 +378,6 @@ const DetailPage = () => {
           currentWidth={clientWidth}
         />
       </div>
-      <Footer />
       <Modal
         title="撰写评论"
         visible={isModalVisible}

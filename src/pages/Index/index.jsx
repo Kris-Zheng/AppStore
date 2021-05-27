@@ -1,20 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { useRequest } from 'ahooks';
+import { useQuery, gql } from '@apollo/client';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Title from '../../components/title';
+import VariableCarousel from '../../components/variableCarousel';
+import HotCategory from '../../components/hotCategory';
+import Row from '../../components/row';
+import BigRow from '../../components/bigRow';
+import BigBanner from '../../components/bigBanner';
+import SmallBanner from '../../components/smallBanner';
 import Card from '../../components/card';
 import VideoPlayer from '../../components/videoPlayer';
-import Bullets from './component/bulletScreen';
 import Apps from '../../components/apps';
-import pic1 from '../../asserts/333.png';
 import icon from '../../asserts/2.png';
-import { queryNb } from '@/utils/api';
-import 'antd/dist/antd.css';
+import pic1 from '../../asserts/333.png';
+import banner from '../../asserts/15.png';
+import Bullets from '../../components/bulletScreen';
+import img from '../../asserts/111.png';
 import styles from './index.less';
 
-export default function IndexPage() {
-  const { data, error, loading } = useRequest(queryNb);
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
+const Today = () => {
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
   const [isShown, setIsShown] = useState(false);
   const [width, setWidth] = useState();
   const [date, setDate] = useState('');
@@ -40,15 +55,15 @@ export default function IndexPage() {
   };
 
   const receiveData = {
-    name: 'AAA',
+    name: 'Today',
     data: [
-      (card: {
+      {
         name: 'card',
         title: '主打推荐',
         subTitle: '带宠闯地牢',
         des: '体验Roguelike 游戏《提灯与地下城》',
         img: pic1,
-      }),
+      },
       {
         name: 'apps',
         title: '专题',
@@ -220,14 +235,109 @@ export default function IndexPage() {
     }
   };
 
+  const map = (index) => {
+    const page = [];
+    const row = findData(index);
+
+    row?.data.map((item, key) => {
+      const content = [];
+
+      switch (index) {
+        case 'row': {
+          content.push(
+            <div key={key}>
+              <Row data={item} />
+            </div>,
+          );
+          break;
+        }
+        case 'bigRow': {
+          content.push(
+            <div key={key}>
+              <BigRow data={item} />
+            </div>,
+          );
+          break;
+        }
+        case 'bigBanner': {
+          content.push(
+            <div key={key}>
+              <BigBanner data={item} />
+            </div>,
+          );
+          break;
+        }
+        case 'smallBanner': {
+          content.push(
+            <div key={key}>
+              <SmallBanner data={item} />
+            </div>,
+          );
+          break;
+        }
+      }
+      page.push(content);
+    });
+    return page;
+  };
+
   const views = {
     card: <Card data={findData('card')} />,
     apps: <Apps data={findData('apps')} />,
     videoPlayer: <VideoPlayer data={findData('videoPlayer')} />,
     bullets: <Bullets data={findData('bullets')} />,
+    row: (
+      <VariableCarousel
+        data={{
+          content: map('row'),
+          width,
+          showAll: true,
+          title: findData('row')?.title,
+        }}
+      />
+    ),
+    bigRow: (
+      <VariableCarousel
+        data={{
+          content: map('bigRow'),
+          showAll: true,
+          width,
+          title: findData('bigRow')?.title,
+        }}
+      />
+    ),
+    bigBanner: (
+      <VariableCarousel
+        data={{
+          content: map('bigBanner'),
+          showAll: false,
+          width,
+        }}
+      />
+    ),
+    smallBanner: (
+      <VariableCarousel
+        data={{
+          content: map('smallBanner'),
+          width: width - 100,
+          titleWidth: width - 40,
+          showAll: true,
+          title: findData('smallBanner')?.title,
+        }}
+      />
+    ),
+    hotCategory: (
+      <HotCategory
+        data={{
+          content: findData('hotCategory')?.data,
+          title: findData('hotCategory')?.title,
+        }}
+      />
+    ),
   };
 
   useEffect(() => {
+    console.log(data);
     setDate(showDate());
     setWeek(showWeek());
     setWidth(document.documentElement.clientWidth);
@@ -250,7 +360,9 @@ export default function IndexPage() {
           return <div key={key}>{views[item.name]}</div>;
         })}
       </main>
-      <Footer name={receiveData.name} />
+      <Footer />
     </>
   );
-}
+};
+
+export default Today;

@@ -30,7 +30,7 @@ const menu = [
   },
 ];
 
-const sideBar = (props) => {
+const sideBar = () => {
   const [currentPath, setCurrentPath] = useState();
 
   useEffect(() => {

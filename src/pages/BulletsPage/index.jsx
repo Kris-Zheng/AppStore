@@ -1,8 +1,5 @@
 import React from 'react';
-import { history } from 'umi';
-import { useRequest } from 'ahooks';
-import { queryNb } from '@/utils/api';
-import Bullets from '../../components/bullets';
+import Bullets from '../../components/bulletScreen/bulletsPosition';
 import Row from '../../components/row';
 import icon from '../../asserts/2.png';
 import styles from './index.less';
@@ -25,10 +22,7 @@ const svg = (
     ></path>
   </svg>
 );
-
 const BulletsPage = () => {
-  const { data, error, loading } = useRequest(queryNb);
-
   const receiveData = {
     name: 'bullets',
     title: '限时特惠',

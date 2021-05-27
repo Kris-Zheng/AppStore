@@ -10,7 +10,16 @@ const bigRow = (props) => {
       <Col span={7} style={{ padding: '10px 0' }}>
         <img src={icon} style={{ width: '100%', borderRadius: 15 }} />
       </Col>
-      <Col span={16} offset={1} className={styles.content}>
+      <Col
+        span={16}
+        offset={1}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+        className={styles.content}
+      >
         <div className={styles.titles}>
           <h3>{item.title}</h3>
           <h4>{item.subTitle}</h4>

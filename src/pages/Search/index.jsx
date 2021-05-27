@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useRequest } from 'ahooks';
-import { queryNb } from '@/utils/api';
+import React, { useState } from 'react';
+import { useQuery, gql } from '@apollo/client';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Title from '../../components/title';
@@ -8,8 +7,17 @@ import Row from '../../components/row';
 import icon from '../../asserts/2.png';
 import styles from './index.less';
 
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
 const search = () => {
-  const { data, error, loading } = useRequest(queryNb);
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
   const [isShown, setIsShown] = useState(false);
 
   const isHeaderShown = (value) => {

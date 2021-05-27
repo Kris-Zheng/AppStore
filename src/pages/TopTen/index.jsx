@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { history } from 'umi';
 import Row from '../../components/row';
 import img from '../../asserts/111.png';
+import icon from '../../asserts/2.png';
 import styles from './index.less';
 
 const svg = (
@@ -23,33 +25,58 @@ const svg = (
 );
 
 const TopTen = () => {
-  const [content, setContent] = useState([]);
-
-  useEffect(() => {
-    const row = [];
-    for (let i = 0; i < 10; ++i) {
-      row.push(<Row />);
-    }
-    setContent(row);
-  }, []);
+  const receiveData = {
+    data: [
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+      {
+        icon,
+        title: '抖音',
+        subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+        downloadLink: 'www.baidu.com',
+      },
+    ],
+  };
 
   return (
     <main>
       <span
         style={{ position: 'fixed', top: 10, right: 10, zIndex: 1 }}
-        onClick={() => window.history.back(-1)}
+        onClick={() => history.goBack()}
       >
         {svg}
       </span>
       <img src={img} alt="bg" style={{ width: '100%' }} />
-      <div className={styles.title}>
-        {/* <h3>编辑最爱</h3>
-        <h1>精选十佳卡牌对战游戏</h1> */}
-      </div>
       <div className={styles.content}>
-        {content.map((item, key) => (
-          <div key={key}>{item}</div>
-        ))}
+        <Row data={receiveData.data} />
       </div>
     </main>
   );

@@ -37,7 +37,7 @@ const centerCarousel = (props) => {
       >
         <h2 style={{ margin: 0 }}>{props.data?.title}</h2>
         <Link
-          to="./list"
+          to="./AppList"
           style={{
             fontSize: 16,
             display: props.data?.showAll ? 'block' : 'none',

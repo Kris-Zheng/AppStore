@@ -3,7 +3,7 @@ import { Row, Col, Progress } from 'antd';
 import icon from '../../asserts/star.svg';
 import styles from './index.less';
 
-const stars = () => {
+const stars = (props) => {
   const [star, setStar] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const stars = () => {
         row.push(<span key={j}>&emsp;</span>);
       }
       for (let v = i; v < 5; ++v) {
-        row.push(<img src={icon} key={v}/>);
+        row.push(<img src={icon} key={v} />);
       }
       setStar((star) => [...star, row]);
     }
@@ -22,7 +22,7 @@ const stars = () => {
   return (
     <Row align="middle" className={styles.rate}>
       <Col span={7}>
-        <h1>4.9</h1>
+        <h1>{props.data.score}</h1>
         <h4>满分5分</h4>
       </Col>
       <Col span={17} style={{ textAlign: 'right' }}>

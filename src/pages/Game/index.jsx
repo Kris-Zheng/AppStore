@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRequest } from 'ahooks';
-import { queryNb } from '@/utils/api';
+import { useQuery, gql } from '@apollo/client';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Title from '../../components/title';
@@ -16,16 +15,26 @@ import Apps from '../../components/apps';
 import icon from '../../asserts/2.png';
 import pic1 from '../../asserts/333.png';
 import banner from '../../asserts/15.png';
+import Bullets from '../../components/bulletScreen';
 import img from '../../asserts/111.png';
 import styles from './index.less';
 
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
 const game = () => {
-  const { data, error, loading } = useRequest(queryNb);
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
   const [isShown, setIsShown] = useState(false);
   const [width, setWidth] = useState();
 
   const receiveData = {
-    name: 'AAA',
+    name: '游戏',
     data: [
       {
         name: 'card',
@@ -33,6 +42,72 @@ const game = () => {
         subTitle: '带宠闯地牢',
         des: '体验Roguelike 游戏《提灯与地下城》',
         img: pic1,
+      },
+      {
+        name: 'row',
+        title: '限时活动特别开启',
+        data: [
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+        ],
       },
       {
         name: 'apps',
@@ -194,8 +269,38 @@ const game = () => {
           ],
         ],
       },
+      {
+        name: 'bigBanner',
+        data: [
+          [
+            {
+              title: '新游戏',
+              subTitle: '秦时明月',
+              des: '重温经典国漫 游历大秦山河',
+              banner,
+            },
+          ],
+          [
+            {
+              title: '新游戏',
+              subTitle: '秦时明月反复额',
+              des: '重温经典国漫 游历大秦山河',
+              banner,
+            },
+          ],
+          [
+            {
+              title: '新游戏',
+              subTitle: '秦时明月',
+              des: '重温经典国漫 游历大秦山河',
+              banner,
+            },
+          ],
+        ],
+      },
     ],
   };
+
   const findData = (name) => {
     for (let i = 0; i < receiveData.data.length; ++i) {
       if (receiveData?.data[i].name === name) {
@@ -254,6 +359,7 @@ const game = () => {
     card: <Card data={findData('card')} />,
     apps: <Apps data={findData('apps')} />,
     videoPlayer: <VideoPlayer data={findData('videoPlayer')} />,
+    bullets: <Bullets data={findData('bullets')} />,
     row: (
       <VariableCarousel
         data={{
@@ -305,6 +411,7 @@ const game = () => {
   };
 
   useEffect(() => {
+    console.log('game ===>', data);
     setWidth(document.documentElement.clientWidth);
   }, []);
 

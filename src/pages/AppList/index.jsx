@@ -1,29 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import BigRow from '../../components/bigRow';
-import { history } from 'umi';
+import pic1 from '../../asserts/333.png';
 import styles from './index.less';
 
 const AppList = () => {
-  const [rows, setRows] = useState([]);
-  useEffect(() => {
-    const data = [];
-    for (let i = 0; i < 9; ++i) {
-      data.push(<BigRow />);
-    }
-    setRows(data);
-  }, []);
+  const receiveData = {
+    data: [
+      {
+        name: 'card',
+        title: '主打推荐',
+        subTitle: '带宠闯地牢',
+        des: '体验Roguelike 游戏《提灯与地下城》',
+        img: pic1,
+      },
+      {
+        name: 'card',
+        title: '主打推荐',
+        subTitle: '带宠闯地牢',
+        des: '体验Roguelike 游戏《提灯与地下城》',
+        img: pic1,
+      },
+      {
+        name: 'card',
+        title: '主打推荐',
+        subTitle: '带宠闯地牢',
+        des: '体验Roguelike 游戏《提灯与地下城》',
+        img: pic1,
+      },
+      {
+        name: 'card',
+        title: '主打推荐',
+        subTitle: '带宠闯地牢',
+        des: '体验Roguelike 游戏《提灯与地下城》',
+        img: pic1,
+      },
+      {
+        name: 'card',
+        title: '主打推荐',
+        subTitle: '带宠闯地牢',
+        des: '体验Roguelike 游戏《提灯与地下城》',
+        img: pic1,
+      },
+    ],
+  };
 
   return (
     <>
       <Header title="我们都在玩" header={true} icon={true} />
       <main className={styles.main}>
-        {rows.map((item, key) => (
-          <div key={key} onClick={() => history.push('./details2')}>
-            {item}
-          </div>
-        ))}
+        <BigRow data={receiveData.data} />
       </main>
       <Footer />
     </>

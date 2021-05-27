@@ -1,9 +1,6 @@
 import React from 'react';
 import { history } from 'umi';
 import { Button } from 'antd';
-import { queryNb } from '@/utils/api';
-import { useRequest } from 'ahooks';
-import Card from '../../components/card';
 import Row from '../../components/row';
 import pic1 from '../../asserts/333.png';
 import icon from '../../asserts/2.png';
@@ -29,8 +26,6 @@ const svg = (
 );
 
 const CardPage = () => {
-  const { data, error, loading } = useRequest(queryNb);
-
   const receiveData = {
     title: '今日推荐',
     subTitle: '带宠闯地牢',
@@ -56,11 +51,16 @@ const CardPage = () => {
       >
         {svg}
       </span>
-      <div className={styles.card} onClick={() => history.push('./details')}>
-        <Card data={receiveData} />
+      <div className={styles.bg}>
+        <img src={receiveData.img} style={{ width: '100%' }} alt="bg" />
+        <div className={styles.title}>
+          <h4 style={{ color: 'lightgray' }}>{receiveData.title}</h4>
+          <h1 style={{ color: 'white' }}>{receiveData.subTitle}</h1>
+          <p>{receiveData.text}</p>
+        </div>
       </div>
       <div className={styles.row}>
-        <Row data={receiveData.data} />
+        <Row data={receiveData.data} width="100%" />
       </div>
       <div className={styles.content}>
         <p>{receiveData.content}</p>

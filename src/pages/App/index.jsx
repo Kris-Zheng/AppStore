@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRequest } from 'ahooks';
-import { queryNb } from '@/utils/api';
+import { useQuery, gql } from '@apollo/client';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Title from '../../components/title';
@@ -16,24 +15,27 @@ import Apps from '../../components/apps';
 import icon from '../../asserts/2.png';
 import pic1 from '../../asserts/333.png';
 import banner from '../../asserts/15.png';
+import Bullets from '../../components/bulletScreen';
 import img from '../../asserts/111.png';
 import styles from './index.less';
 
+const EXCHANGE_RATES = gql`
+  query GetExchangeRates {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
+
 const App = () => {
-  const { data, error, loading } = useRequest(queryNb);
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
   const [isShown, setIsShown] = useState(false);
   const [width, setWidth] = useState();
   const receiveData = {
-    name: 'BBB',
+    name: 'App',
     icon,
     data: [
-      {
-        name: 'card',
-        title: '主打推荐',
-        subTitle: '带宠闯地牢',
-        des: '体验Roguelike 游戏《提灯与地下城》',
-        img: pic1,
-      },
       {
         name: 'bigBanner',
         data: [
@@ -207,6 +209,128 @@ const App = () => {
           { name: '体育', icon: 'icon-popcorn-icon' },
         ],
       },
+      {
+        name: 'bullets',
+        title: '限时特惠',
+        subTitle: '春日游戏限时特惠',
+        des: 'zcvzvdv',
+        data: [
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+          [
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+            {
+              icon,
+              title: '抖音',
+              subTitle: '记录美好生活无纺布生机勃发建设步伐加快',
+              downloadLink: 'www.baidu.com',
+            },
+          ],
+        ],
+      },
     ],
   };
 
@@ -268,6 +392,7 @@ const App = () => {
     card: <Card data={findData('card')} />,
     apps: <Apps data={findData('apps')} />,
     videoPlayer: <VideoPlayer data={findData('videoPlayer')} />,
+    bullets: <Bullets data={findData('bullets')} />,
     row: (
       <VariableCarousel
         data={{
@@ -303,7 +428,7 @@ const App = () => {
           content: map('smallBanner'),
           width: width - 100,
           titleWidth: width - 40,
-          showAll: true,
+          showAll: false,
           title: findData('smallBanner')?.title,
         }}
       />

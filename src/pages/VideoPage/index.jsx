@@ -1,7 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useRequest } from 'ahooks';
 import { Button } from 'antd';
-import { queryNb } from '@/utils/api';
 import icon from '../../asserts/2.png';
 import styles from './index.less';
 
@@ -25,7 +23,6 @@ const svg = (
 );
 
 const VideoPlayer = () => {
-  const { data, error, loading } = useRequest(queryNb);
   const [isBottom, setIsBottom] = useState(true);
   const ref = useRef();
 
